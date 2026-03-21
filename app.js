@@ -21,7 +21,7 @@ const ai = new genai.GoogleGenAI({
 const multer = require("multer");
 // const fs = require("fs");
 // project ppt time
-const { storage } = require("./utils/cloudConfig");
+const { storage } = require("./utils/cloudConfig.js");
 const upload = multer({ storage });
 const session = require("express-session");
 const MongoStore = require("connect-mongo").default;
@@ -34,6 +34,7 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.set("trust proxy", 1);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -56,11 +57,13 @@ app.use(
     saveUninitialized: false,
 
     store: MongoStore.create({
-      client: process.env.MONGODB_URL, // ✅ important
+      mongoUrl: process.env.MONGODB_URL, // ✅ important
     }),
 
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
+      httpOnly: true,
+      secure: true, // 🔥 important for production
     },
   }),
 );
