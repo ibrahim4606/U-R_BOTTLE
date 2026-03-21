@@ -1,0 +1,73 @@
+<% layout("/layouts/boilerplate") -%>
+
+    <div class="container my-5">
+
+        <div class="text-center mb-5">
+
+            <h2 class="fw-bold text-dark" data-aos="fade-down">
+                <i class="fa-solid fa-user-circle me-2"></i> My Profile
+            </h2>
+
+            <p class="text-muted" data-aos="fade-down">
+                Manage your account information
+            </p>
+
+        </div>
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-6">
+
+                <div class="card profile-card shadow-lg" data-aos="zoom-in">
+
+                    <div class="card-body text-center">
+
+                        <!-- USER ICON -->
+
+                        <div class="profile-icon mb-3">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+
+                        <h4 class="fw-bold">
+                            <%= user.name %>
+                        </h4>
+
+                        <p class="text-muted">
+                            <%= user.email %>
+                        </p>
+
+                        <hr>
+
+                        <div class="profile-info">
+
+                            <p>
+                                <strong>Account Created :</strong>
+                                <%= new Date(user.createdAt).toDateString() %>
+                            </p>
+
+                        </div>
+
+
+                        <div class="mt-4 flex-nowrap">
+
+                            <a href="/orders" class="btn me-2">
+                                <i class="fa-solid fa-box"></i> My Orders
+                            </a>
+
+                            <a href="/logout" class="btn">
+                                <i class="fa-solid fa-right-from-bracket"></i> Logout
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>

@@ -1,0 +1,33 @@
+<form action="/design-studio/save-ai-generate" method="POST">
+    <div class="col">
+        <div class="row">
+            <h3 class="mt-3">Slogan's</h3>
+            <% if (AiGenDes && AiGenDes.length> 0) { %>
+
+                <% for (let slogan of AiGenDes[0].outputSlogan) { %>
+
+                    <div class="input-group mb-3" data-aos="fade-up">
+                        <div class="input-group-text border-2">
+                            <input class="form-check-input mt-0 border-2" type="checkbox" value="<%= slogan  %>"
+                                aria-label="Checkbox for following text input" name="selected[Slogans]">
+                        </div>
+                        <input type="text" class="form-control border-2" aria-label="Text input with checkbox"
+                            value="<%= slogan  %>" readonly>
+                    </div>
+                    <% } %>
+
+                        <% } else { %>
+
+                            <p>No slogans generated yet.</p>
+
+                            <% } %>
+
+        </div>
+
+        <div class="row p-2">
+            <div class="d-flex justify-content-center"><button class="btn mb-3  px-3 ms-1 fs-6" type="submit">Save
+                    Generated <i class="fa-regular fa-circle-down fs-5 p-1"></i></button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,130 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="container mt-5">
+
+        <h2 class="fw-bold text-center mb-3" data-aos="fade-down">
+            <i class="fa-solid fa-credit-card"></i> Checkout
+        </h2>
+
+        <div class="row">
+
+            <div class="col-md-7">
+
+                <form action="/place" method="POST" class="needs-validation" novalidate>
+                    <div class="mb-2" data-aos="fade-up">
+                        <label for="fullname" class="form-label">Name</label>
+                        <input class="form-control border-2 mb-1" name="fullName" placeholder="Full Name" type="text"
+                            required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please Enter Your Full Name!
+                        </div>
+                    </div>
+
+                    <div class="mb-2" data-aos="fade-up">
+                        <label for="phone" class="form-label">Mobile Number</label>
+                        <input class="form-control border-2 mb-1" name="phone" placeholder="Phone" type="text"
+                            maxlength="10" pattern="[0-9]{10}" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please Enter Your number!
+                        </div>
+                    </div>
+
+                    <div class="mb-2" data-aos="fade-up">
+                        <label for="address" class="form-label">Address</label>
+                        <textarea name="address" class="form-control border-2 prompt" type="text"
+                            placeholder="Address, landmark..," required></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please Enter Your Full Address!
+                        </div>
+                    </div>
+
+                    <div class="mb-2" data-aos="fade-up">
+                        <label for="City" class="form-label">City</label>
+                        <input class="form-control border-2 mb-1" name="city" placeholder="City" type="text" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please Enter Your city!
+                        </div>
+                    </div>
+
+                    <div class="mb-2" data-aos="fade-up">
+                        <label for="pincode" class="form-label">Pincode</label>
+                        <input class="form-control border-2 mb-1" name="pincode" placeholder="Pincode" type="text"
+                            maxlength="6" pattern="[0-9]{6}" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please Enter Your Area Pincode!
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex justify-content-center" data-aos="fade-up"><button
+                            class="btn mb-3 px-5 ms-1 fs-5" type="submit">Confirm Order</button></div>
+
+                </form>
+
+            </div>
+
+
+            <div class="col-md-5">
+
+                <div class="card shadow mt-4" data-aos="fade-left">
+
+                    <div class="card-body">
+
+                        <h5><strong>Order Summary</strong></h5>
+
+                        <hr>
+
+                        <% cart.forEach(c=>{ %>
+                            <% c.items.forEach(i=>{ %>
+                                <p>
+                                    For:
+                                    <span class="float-end fw-bold text-danger">
+                                        <%= i.title %>
+                                    </span>
+                                </p>
+                                <p>
+                                    Per Unit Price:
+                                    <span class="float-end">
+                                        ₹ <%= i.perUnitPrice %>
+                                    </span>
+                                </p>
+
+                                <p>
+                                    <%= i.bottleVolume %>ml × <%= i.units %>
+                                            <span class="float-end fw-bold">
+                                                ₹ <%= i.TotalPrice %>
+                                            </span>
+                                </p>
+
+                                <% }) %>
+                                    <% }) %>
+
+                                        <hr>
+
+                                        <h5 class="text-success">Total: ₹ <%= total %>
+                                        </h5>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>

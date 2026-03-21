@@ -1,0 +1,78 @@
+<% layout("/layouts/boilerplate") -%>
+
+    <div class="container py-5">
+
+        <!-- Heading -->
+        <div class="text-center mb-5">
+            <h2 class="fw-bold text-dark" data-aos="fade-down">Pricing</h2>
+            <p class="text-muted" data-aos="fade-down">
+                Choose the bottle size that fits your needs and check the pricing details below.
+            </p>
+        </div>
+
+
+        <!-- Pricing Cards -->
+        <div class="row g-4 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-1">
+
+            <% prices.forEach(item=> { %>
+
+                <div class="col">
+                    <div class="pricing-card">
+                        <div class="card h-100 shadow-sm border-0 text-center" data-aos="flip-right">
+
+                            <!-- Bottle Image -->
+                            <div class="p-4">
+                                <img src="/images/template1.png" class="img-fluid" style="max-height:250px;">
+                            </div>
+
+                            <!-- Card Body -->
+                            <div class="card-body">
+
+                                <h5 class="fw-bold mb-3">
+                                    <%= item.bottleVolume %>
+                                </h5>
+
+                                <ul class="list-unstyled text-start small">
+
+                                    <li>• Base Price: ₹ <%= item.basePrice %>
+                                    </li>
+
+                                    <li>• Printing Cost: ₹ <%= item.printingCost %>
+                                    </li>
+
+                                    <li>• Minimum Units: <%= item.minOrderQty %>
+                                    </li>
+
+                                    <li>• Bottles / Unit: ₹ <%= item.bottlePerUnit %>
+                                    </li>
+
+                                    <li class="fw-semibold mt-2">
+                                        Total Price Per Unit: ₹ <%= item.basePrice + item.printingCost %>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                            <!-- Button -->
+                            <div class="pb-4">
+                                <a href="/design-studio" class="btn px-4">
+                                    Order Now
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <% }) %>
+
+        </div>
+
+        <hr class="mt-5 border border-black">
+        <div class="d-flex justify-content-center mt-5">
+            <a href="/design-studio" class="btn edit-btn ms-2 mt-1 btn-lg" data-aos="zoom-out">Start Your
+                Designing</a>
+        </div>
+
+    </div>

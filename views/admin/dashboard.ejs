@@ -1,0 +1,101 @@
+<% layout("/admin/admin-boilerplate") -%>
+
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between">
+            <h2 class="mb-4">
+                <i class="fa-solid fa-chart-line"></i> Admin Dashboard
+            </h2>
+
+            <a href="/admin/logout" class="btn me-5" style="height: 100%;">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </div>
+        <div class="row g-3">
+
+            <div class="col">
+
+                <div class="card shadow text-center bg-info-subtle" style="min-height: 100px; max-height: 100px;">
+
+                    <div class="card-body">
+
+                        <h6>Total Orders</h6>
+                        <h3>
+                            <%= totalOrders %>
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col">
+
+                <div class="card shadow text-center bg-warning-subtle" style="min-height: 100px; max-height: 100px;">
+
+                    <div class="card-body">
+
+                        <h6>In Progress</h6>
+                        <h3>
+                            <%= inProgress %>
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col">
+
+                <div class="card shadow text-center bg-success-subtle" style="min-height: 100px; max-height: 100px;">
+
+                    <div class="card-body">
+
+                        <h6>Delivered</h6>
+                        <h3>
+                            <%= delivered %>
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col">
+
+                <div class="card shadow text-center bg-danger-subtle" style="min-height: 100px; max-height: 100px;">
+
+                    <div class="card-body">
+
+                        <h6>Rejected</h6>
+                        <h3>
+                            <%= rejected %>
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col">
+
+                <div class="card shadow text-center bg-info-subtle" style="min-height: 100px; max-height: 100px;">
+
+                    <div class="card-body">
+
+                        <h6>Total Revenue</h6>
+                        <h3>₹ <%= totalRevenue %>
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <%- include("order-management") %>

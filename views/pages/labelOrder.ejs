@@ -1,0 +1,199 @@
+<h3 class="m-3">Template's</h3>
+
+<form action="/cart" method="POST" class="needs-validation mx-5" enctype="multipart/form-data" novalidate>
+
+    <!-- Hidden input to store selected template -->
+    <input type="hidden" name="selectedTemplate" id="selectedTemplate">
+
+
+    <div class="row template-scroll d-flex flex-nowrap py-3 border border-2 border-secondary-subtle rounded-4 bg-white">
+
+        <!-- Left Arrow -->
+        <div class="arrow-icon ms-2">
+            <i class="fa-solid fa-angle-right"></i>
+        </div>
+        <% let temp_img=["Template1","Template1","Template1"]; %>
+
+            <% for(let i=0; i < temp_img.length; i++) { %>
+                <div class="col-md-3 col-sm-8 col-8 ">
+                    <div class="card template-card mx-2 bg-body-tertiary" data-template="<%= temp_img[i]%>.png"
+                        style="cursor: pointer;" data-aos="flip-right">
+                        <img src="/images/<%= temp_img[i]%>.png" class="card-img-top object-fit-cover" height="300px"
+                            width="200px">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Template <%=i+1%>
+                            </h5>
+                        </div>
+
+                    </div>
+                </div>
+                <%}%>
+
+                    <!-- Right Arrow -->
+                    <div class="arrow-icon me-2">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </div>
+
+
+    </div>
+    <label class="form-label mt-3">Volume</label>
+
+    <div class="row row-cols-2 row-cols-sm-6 gx-5 ms-3">
+
+        <div class="form-check">
+            <input class="form-check-input volume-radio" type="radio" name="order[bottleVolume]" value="100">
+            <label class="form-check-label">100ML</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input volume-radio" type="radio" name="order[bottleVolume]" value="250">
+            <label class="form-check-label">250ML</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input volume-radio" type="radio" name="order[bottleVolume]" value="500">
+            <label class="form-check-label">500ML</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input volume-radio" type="radio" name="order[bottleVolume]" value="1000">
+            <label class="form-check-label">1L</label>
+        </div>
+
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 gx-5 mt-3">
+
+        <div class="mb-3 ">
+            <label for="title" class="form-label">Title</label>
+            <input name="order[title]" placeholder="Enter Brand Name" type="text" class="form-control border-2"
+                maxlength="30" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please Enter Brand Name!
+            </div>
+        </div>
+        <div class="mb-3 ">
+            <label for="BrandType" class="form-label">Brand Type</label>
+            <input name="order[BrandType]" placeholder="Brand Type(Hotel,Cafe,etc..)" type="text"
+                class="form-control border-2" maxlength="30" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please Enter Type Of Buisness!
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="colors" class="form-label">Theme Colors</label>
+            <input name="order[colorTheme]" placeholder="Colors you want to add" type="text"
+                class="form-control border-2" maxlength="30" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please Enter Color of Theme!
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="prompt" class="form-label">About You</label>
+            <textarea name="order[description]" class="form-control border-2 prompt" type="text" rows="1" maxlength="50"
+                placeholder="Some about your buisness in small" required></textarea>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please Enter Some if info about your Buisness!
+            </div>
+
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 gx-5">
+        <div>
+            <div class="mb-3 ">
+                <label for="slogan" class="form-label">Slogan</label>
+                <input name="order[slogan]" placeholder="Enter your Brand slogan" type="text"
+                    class="form-control border-2" maxlength="30" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please Enter Any slogan for your Brand!
+                </div>
+            </div>
+            <h6>Generated Slogan's</h6>
+
+            <div class="row row-cols-1 row-cols-sm-2 g-3">
+                <% if (SaveAiDes && SaveAiDes.length> 0) { %>
+
+                    <% for (let design of SaveAiDes) { %>
+                        <% for (let slogan of design.Slogans) { %>
+
+                            <div class="col" data-aos="fade-up">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-circle"></i>
+                                    </span>
+                                    <input class="form-control" style="font-size: 0.85rem;" type="text"
+                                        value="<%= slogan %>" readonly>
+                                </div>
+                            </div>
+
+                            <% } %>
+                                <% } %>
+
+                                    <% } else { %>
+                                        <p>No slogans generated yet.</p>
+                                        <% } %>
+            </div>
+        </div>
+        <div>
+
+            <!--            <input type="hidden" id="selectedLogo" name="selectedLogo"> -->
+            <div class="mb-3">
+                <label for="formFile" id="fileLabel" class="form-label">Upload your logo</label>
+                <input class="form-control" type="file" id="formFile" name="order[logo]" required>
+                <div class="valid-feedback">
+                    Good Choice!
+                </div>
+                <div class="invalid-feedback">
+                    Please Add logo!
+                </div>
+
+                <!-- generated logo -->
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-3 gx-5">
+
+        <div class="my-3">
+            <label class="form-label">Units</label>
+            <input id="units" name="order[units]" type="number" class="form-control border-2" min="5" required>
+            <div id="bottlesInfo" class="form-text">
+                Select volume to see bottles per unit
+            </div>
+        </div>
+
+        <div class="my-3">
+            <label class="form-label">Per Unit Price</label>
+            <input id="perUnitPrice" name="order[perUnitPrice]" type="text" class="form-control border-2" required>
+        </div>
+
+        <div class="my-3">
+            <label class="form-label">Total Price</label>
+            <input id="totalPrice" name="order[TotalPrice]" type="text" class="form-control border-2" required>
+        </div>
+
+    </div>
+    <div class="d-flex justify-content-center mt-3" data-aos="zoom-out">
+        <button class="btn mb-3  px-5 ms-1 fs-5" type="submit">Add
+            to
+            cart <i class="fa-solid fa-cart-arrow-down fs-5 p-1"></i>
+        </button>
+    </div>
+
+</form>

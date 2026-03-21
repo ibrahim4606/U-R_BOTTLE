@@ -1,0 +1,81 @@
+<% layout("/layouts/boilerplate") -%>
+
+    <div class=" container border border border-opacity-25 rounded-3 my-5 shadow-lg py-3 bg-body-tertiary"
+        data-aos="fade-up">
+        <h3 class="m-3">Register Your Help..!</h3>
+        <form action="/contact" method="POST" class="needs-validation mx-5" novalidate>
+            <div class="row row-cols-1 row-cols-sm-2 gx-5 mt-3">
+
+                <div class="mb-3 ">
+                    <label for="name" class="form-label">Name</label>
+                    <input name="contact[name]" placeholder="Enter Your Name" type="text" class="form-control border-2"
+                        maxlength="30" required>
+                </div>
+                <div class="mb-3 ">
+                    <label for="number" class="form-label">Mobile Number</label>
+                    <input name="contact[number]" placeholder="Enter Your Number" type="number"
+                        class="form-control border-2" maxlength="10" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input name="contact[email]" placeholder="Enter your mail" type="email"
+                        class="form-control border-2" maxlength="50" required>
+                </div>
+                <div class="mb-3">
+                    <label for="complaint" class="form-label">Doubt</label>
+                    <textarea name="contact[complaint]" class="form-control border-2 prompt" type="text" rows="2"
+                        placeholder="Ask Your Doubt" required></textarea>
+
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mt-3" data-aos="zoom-out">
+                <button class="btn mb-3  px-5 ms-1 fs-5" type="submit">Submit
+                </button>
+            </div>
+        </form>
+
+        <div class="d-flex justify-content-center">
+
+            <div class="card contact-card p-4 my-4" style="max-width: 60%;" data-aos="fade-up">
+
+                <h4 class="mb-4" data-aos="fade-down">Contact Information</h4>
+                <div class="row row-cols-1 row-cols-sm-2 gx-5 mt-3">
+                    <div>
+                        <p>
+                            <i class="fa-solid fa-location-dot contact-icon"></i>
+                            &nbsp; Pune, Maharashtra, India
+                        </p>
+
+                        <p>
+                            <i class="fa-solid fa-phone contact-icon"></i>
+                            &nbsp; +91 9322761964
+                        </p>
+
+                        <p style="text-wrap: nowrap;">
+                            <i class="fa-solid fa-envelope contact-icon"></i>
+                            &nbsp; ibrahimvpthan@gmail.com
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            <i class="fa-solid fa-location-dot contact-icon"></i>
+                            &nbsp; Pune, Maharashtra, India
+                        </p>
+
+                        <p>
+                            <i class="fa-solid fa-phone contact-icon"></i>
+                            &nbsp; +91 9876543210
+                        </p>
+
+                        <p style="text-wrap: nowrap;">
+                            <i class="fa-solid fa-envelope contact-icon"></i>
+                            &nbsp; info@yourcompany.com
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>

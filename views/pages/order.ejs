@@ -1,0 +1,184 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="container mt-5">
+
+        <h2 class="fw-bold text-center mb-4" data-aos="fade-down">
+            <i class="fa-solid fa-box"></i> My Orders
+        </h2>
+
+        <% if(orders.length===0){ %>
+
+            <div class="alert alert-info">
+                You have no orders yet.
+            </div>
+
+            <% } %>
+
+                <div class="row">
+
+                    <% orders.forEach(o=> { %>
+
+                        <div class="col-lg-6">
+
+                            <div class="card shadow p-3 mb-4" data-aos="fade-down" data-aos-duaration="0">
+
+                                <div class="d-flex align-items-center">
+
+                                    <% if(o.items && o.items.length> 0){ %>
+
+                                        <img src="<%= o.items[0].logo %>" width="80">
+
+                                        <% } else { %>
+
+                                            <img src="/images/default.png" width="80">
+
+                                            <% } %>
+                                                <div class="ms-3">
+
+                                                    <h6 class="fw-bold">
+                                                        Order #<%= o.orderNumber %>
+                                                    </h6>
+
+                                                    <p class="text-muted mb-1">
+                                                        <%= new Date(o.createdAt).toDateString() %>
+                                                    </p>
+
+                                                </div>
+
+                                                <div class="ms-auto">
+
+                                                    <h5 class="text-success fw-bold">
+                                                        ₹ <%= o.totalAmount %>
+                                                    </h5>
+
+                                                </div>
+
+                                </div>
+
+                                <div class="progress mt-3" style="height:10px;">
+
+                                    <div class="progress-bar order-progress order-prog-color" role="progressbar"
+                                        data-status="<%= o.orderStatus %>">
+
+                                    </div>
+
+                                </div>
+
+                                <% if(o.orderStatus==="Rejected" ){ %>
+
+                                    <div class="alert alert-danger mt-2">
+
+                                        <strong>Status: Order Rejected</strong><br>
+
+                                        Reason: <%= o.rejectReason %>
+
+                                    </div>
+
+                                    <% } else{ %>
+
+                                        <p class="mt-2 small text-muted">
+                                            Status: <strong>
+                                                <%= o.orderStatus %>
+                                            </strong>
+                                        </p>
+                                        <%}%>
+
+
+
+                                            <hr>
+
+                                            <div class="d-flex justify-content-between align-items-center mb-2 px-3 cursor-pointer"
+                                                data-bs-toggle="collapse" data-bs-target="#collapse<%= o._id %>"
+                                                aria-expanded="false" aria-controls="collapse<%= o._id %>">
+
+                                                <span class="fw-semibold">
+                                                    View Details
+                                                </span>
+
+                                                <i class="fa-solid fa-angle-down rotate-icon"></i>
+
+                                            </div>
+
+                                            <div class="collapse" id="collapse<%= o._id %>">
+
+                                                <!-- ORDER INFO -->
+                                                <p class="mb-1">
+                                                    <b>Order ID:</b>
+                                                    <%= o.orderNumber %>
+                                                </p>
+
+                                                <p class="mb-1">
+                                                    <b>Date:</b>
+                                                    <%= new Date(o.createdAt).toDateString() %>
+                                                </p>
+
+                                                <p class="mb-1">
+                                                    <b>Total:</b> ₹ <%= o.totalAmount %>
+                                                </p>
+
+                                                <hr>
+
+                                                <!-- CUSTOMER DETAILS -->
+                                                <h6 class="fw-bold">Customer</h6>
+
+                                                <p class="mb-1">
+                                                    <b>Name:</b>
+                                                    <%= o.shippingDetails?.fullName || "-" %>
+                                                </p>
+
+                                                <p class="mb-1">
+                                                    <b>Phone:</b>
+                                                    <%= o.shippingDetails?.phone || "-" %>
+                                                </p>
+
+                                                <p class="mb-1">
+                                                    <b>City:</b>
+                                                    <%= o.shippingDetails?.city || "-" %>
+                                                </p>
+
+                                                <p class="mb-2">
+                                                    <b>Address:</b>
+                                                    <%= o.shippingDetails?.address || "-" %>
+                                                </p>
+
+                                                <hr>
+
+                                                <!-- ITEMS -->
+                                                <h6 class="fw-bold">Items</h6>
+
+                                                <% o.items.forEach(item=> { %>
+
+                                                    <div class="border rounded p-2 mb-2">
+
+                                                        <div class="d-flex align-items-center">
+
+                                                            <img src="<%= item.logo %>" width="60" class="me-2">
+
+                                                            <div>
+                                                                <p class="mb-0 fw-bold">
+                                                                    <%= item.title %>
+                                                                </p>
+
+                                                                <small>
+                                                                    Units: <%= item.units %> |
+                                                                        Price: ₹ <%= item.perUnitPrice %>
+                                                                </small>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <% }) %>
+
+                                            </div>
+
+                            </div>
+
+                        </div>
+
+                        <% }) %>
+
+                </div>
+
+    </div>

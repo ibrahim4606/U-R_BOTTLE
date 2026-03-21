@@ -1,0 +1,255 @@
+<form action="" method="POST">
+
+    <!-- Hidden input to store selected template -->
+    <input type="hidden" name="selectedTemplate" id="selectedTemplate">
+
+    <div class="row">
+
+        <% templates.forEach((template, index)=> { %>
+
+            <div class="col-md-3 mb-3">
+                <div class="card template-card" data-template="<%= template.name %>" style="cursor: pointer;">
+
+                    <img src="<%= template.image %>" class="card-img-top">
+
+                    <div class="card-body text-center">
+                        <h5 class="card-title">
+                            <%= template.name %>
+                        </h5>
+                    </div>
+
+                </div>
+            </div>
+
+            <% }) %>
+
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">
+        Save Template
+    </button>
+
+</form>
+
+
+<% layout("/layouts/boilerplate") -%>
+
+    <div class="container mt-4">
+
+        <h2 class="mb-4 text-white" data-aos="fade-down">Your Cart</h2>
+
+
+        <% if(cart.length===0){ %>
+
+            <div class="alert alert-info" data-aos="zoom-in">
+                Your cart is empty.
+            </div>
+
+            <% } %>
+
+                <div class="row row-cols-lg-2 row-cols-md-1">
+                    <% cart.forEach(c=> { %>
+                        <% c.items.forEach(item=> { %>
+                            <div class="col">
+                                <div class="card mb-5 shadow-sm" style="max-width: 720px;" data-aos="fade-down">
+                                    <div class="row">
+
+                                        <!-- Logo -->
+                                        <div class="col d-flex align-items-center justify-content-center p-3"
+                                            data-aos="flip-right">
+                                            <img src="<%= item.logo %>" class="img-fluid rounded"
+                                                style="max-height:200px;">
+                                        </div>
+
+                                        <!-- Details -->
+                                        <div class="col" data-aos="fade-right">
+                                            <div class="card-body">
+
+                                                <h5 class="card-title">
+                                                    <%= item.title %>
+                                                </h5>
+
+                                                <p class="card-text mb-1">
+                                                    <strong>Brand Type:</strong>
+                                                    <%= item.BrandType %>
+                                                </p>
+
+                                                <p class="card-text mb-1">
+                                                    <strong>Volume:</strong>
+                                                    <%= item.bottleVolume %> ML
+                                                </p>
+
+                                                <p class="card-text mb-1">
+                                                    <strong>Units:</strong>
+                                                    <%= item.units %>
+                                                </p>
+
+                                                <p class="card-text mb-1">
+                                                    <strong>Price / Unit:</strong> ₹<%= item.perUnitPrice %>
+                                                </p>
+
+                                                <p class="card-text fw-bold text-success">
+                                                    Total Price: ₹<%= item.TotalPrice %>
+                                                </p>
+
+                                                <p class="card-text">
+                                                    <small class="text-body-secondary">
+                                                        Added <%= new Date(c.createdAt).toLocaleString() %>
+                                                    </small>
+                                                </p>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="d-flex justify-content-evenly ">
+                                            <form action="">
+                                                <button class="btn mb-3  px-5 ms-1" type="submit">Place Order</button>
+                                            </form>
+                                            <form action="/cart/<%= c._id %>?_method=DELETE" method="POST">
+                                                <button class="btn mb-3  px-5 ms-1">Remove</button>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <% }) %>
+                                <% }) %>
+
+                </div>
+    </div>
+
+
+
+
+
+    <% layout("/layouts/boilerplate") -%>
+
+        <div class="container mt-4">
+
+            <h2 class="mb-4" data-aos="fade-down">Pricing</h2>
+
+
+            <div class="row row-cols-lg-2 row-cols-md-1">
+                <% prices.forEach(item=> { %>
+                    <div class="col">
+                        <div class="card mb-5 shadow-sm" style="max-width: 720px;" data-aos="fade-down">
+                            <div class="row">
+
+                                <!-- Logo -->
+                                <div class="col d-flex align-items-center justify-content-center p-3"
+                                    data-aos="flip-right">
+                                    <img src="/images/template1.png" class="img-fluid rounded"
+                                        style="max-height:200px;">
+                                </div>
+
+                                <!-- Details -->
+                                <div class="col" data-aos="fade-right">
+                                    <div class="card-body">
+
+                                        <h5 class="card-title">
+                                            <%= item.bottleVolume %>
+                                        </h5>
+
+                                        <p class="card-text mb-1">
+                                            <strong>Base Price:</strong>
+                                            ₹ <%= item.basePrice %>
+                                        </p>
+
+                                        <p class="card-text mb-1">
+                                            <strong>Priting Cost:</strong>
+                                            ₹ <%= item.printingCost %>
+                                        </p>
+
+                                        <p class="card-text mb-1">
+                                            <strong>Minimum Units:</strong>
+                                            <%= item.minOrderQty %>
+                                        </p>
+
+                                        <p class="card-text mb-1">
+                                            <strong>Bottles / Unit:</strong> ₹<%= item.bottlePerUnit %>
+                                        </p>
+
+                                        <p class="card-text mb-1">
+                                            <strong>Total Price Per Unit:</strong> ₹ <%= (item.basePrice +
+                                                item.printingCost) %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <% }) %>
+            </div>
+
+
+        </div>
+
+
+        <!-- image generation all logic -->
+
+        <!-- save ai generate ejs -->
+        <div class="row p-3 border-2">
+            <h3>Logo</h3>
+
+            <% if (AiGenDes && AiGenDes.length> 0 && AiGenDes[0].image) { %>
+
+                <img src="<%= AiGenDes[0].image %>" height="400px" width="400px"
+                    class="object-fit-contain border rounded mx-auto d-block bg-white" alt="generated logo">
+
+                <!-- hidden input to send in form -->
+                <input type="hidden" name="selected[logo]" value="<%= AiGenDes[0].image %>">
+
+                <% } else { %>
+
+                    <img src="/images/logo1.png" height="400px" width="400px"
+                        class="object-fit-contain border rounded mx-auto d-block bg-white" alt="default logo">
+
+                    <% } %>
+        </div>
+
+        <!-- label order ejs -->
+
+        <h6>Generated Logo</h6>
+
+        <div
+            class="img-con p-2 template-scroll row d-flex flex-nowrap border border-2 border-secondary-subtle rounded-4 bg-white">
+
+            <% let hasLogo=false; %>
+
+                <% if (SaveAiDes && SaveAiDes.length> 0) { %>
+
+                    <% SaveAiDes.forEach(design=> { %>
+
+                        <% if (design.logo && design.logo.length> 0) {
+                            hasLogo = true;
+                            %>
+
+                            <% design.logo.forEach(l=> { %>
+
+                                <img src="<%= l %>"
+                                    class="img-thumbnail object-fit-contain border rounded mx-2 generated-logo"
+                                    data-logo="<%= l %>" style="width:200px; cursor:pointer;" data-aos="flip-right">
+
+                                <% }) %>
+
+                                    <% } %>
+
+                                        <% }) %>
+
+                                            <% } %>
+
+                                                <% if (!hasLogo) { %>
+                                                    <img src="/images/logo1.png"
+                                                        class="img-thumbnail object-fit-contain border rounded mx-2 generated-logo"
+                                                        data-logo="/images/logo1.png"
+                                                        style="width:200px; cursor:pointer;" data-aos="fade-up">
+                                                    <% } %>
+
+        </div>
+
+        //

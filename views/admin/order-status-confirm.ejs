@@ -1,0 +1,72 @@
+<div class="modal fade" id="statusConfirmModal">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    Confirm Order Update
+                </h5>
+
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+
+            </div>
+
+            <div class="modal-body text-center">
+
+                <p id="confirmMessage" class="fw-semibold">
+                </p>
+
+            </div>
+
+            <div class="modal-footer justify-content-center">
+
+                <button class="btn me-3" data-bs-dismiss="modal">
+
+                    Cancel
+
+                </button>
+
+                <form id="confirmForm" method="POST">
+
+                    <input type="hidden" name="status" id="confirmStatus">
+
+                    <button class="btn me-3">
+
+                        Yes Update
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    function openConfirmModal(orderId, status) {
+
+        const modal = new bootstrap.Modal(
+            document.getElementById("statusConfirmModal")
+        );
+
+        document.getElementById("confirmMessage").innerText =
+            "Are you sure you want to mark this order as '" + status + "' ?";
+
+        document.getElementById("confirmForm").action =
+            "/admin/order/" + orderId;
+
+        document.getElementById("confirmStatus").value = status;
+
+        modal.show();
+
+    }
+
+</script>

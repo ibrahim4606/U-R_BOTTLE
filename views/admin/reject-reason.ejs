@@ -1,0 +1,159 @@
+<div class="modal fade" id="rejectModal<%=order._id%>">
+
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    Reject Order <%=order.orderNumber%>
+                </h5>
+
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+
+            </div>
+
+            <form action="/admin/order/<%=order._id%>" method="POST">
+
+                <div class="modal-body">
+
+                    <input type="hidden" name="status" value="Rejected">
+
+                    <!-- ORDER DETAILS -->
+
+                    <div class="card mb-3">
+
+                        <div class="card-body">
+
+                            <h6 class="fw-bold">Order Details</h6>
+
+                            <p class="mb-1"><b>Order No:</b>
+                                <%=order.orderNumber%>
+                            </p>
+
+                            <p class="mb-1"><b>Total Amount:</b> ₹ <%=order.totalAmount%>
+                            </p>
+
+                            <p class="mb-1"><b>Status:</b>
+                                <%=order.orderStatus%>
+                            </p>
+
+                            <p class="mb-1"><b>Date:</b>
+                                <%=order.createdAt.toDateString()%>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- USER DETAILS -->
+
+                    <div class="card mb-3">
+
+                        <div class="card-body">
+
+                            <h6 class="fw-bold">Customer Details</h6>
+
+                            <p class="mb-1"><b>Name:</b>
+                                <%=order.shippingDetails.fullName%>
+                            </p>
+
+                            <p class="mb-1"><b>Phone:</b>
+                                <%=order.shippingDetails.phone%>
+                            </p>
+
+                            <p class="mb-1"><b>City:</b>
+                                <%=order.shippingDetails.city%>
+                            </p>
+
+                            <p class="mb-1"><b>Address:</b>
+                                <%=order.shippingDetails.address%>
+                            </p>
+
+                            <p class="mb-1"><b>Pincode:</b>
+                                <%=order.shippingDetails.pincode%>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ITEMS -->
+
+                    <div class="card mb-3">
+
+                        <div class="card-body">
+
+                            <h6 class="fw-bold">Items</h6>
+
+                            <% order.items.forEach(item=> { %>
+
+                                <div class="border rounded p-2 mb-2">
+
+                                    <p class="mb-1"><b>Title:</b>
+                                        <%=item.title%>
+                                    </p>
+
+                                    <p class="mb-1"><b>Brand Type:</b>
+                                        <%=item.BrandType%>
+                                    </p>
+
+                                    <p class="mb-1"><b>Volume:</b>
+                                        <%=item.bottleVolume%> ml
+                                    </p>
+
+                                    <p class="mb-1"><b>Units:</b>
+                                        <%=item.units%>
+                                    </p>
+
+                                    <p class="mb-1"><b>Price:</b> ₹ <%=item.perUnitPrice%>
+                                    </p>
+
+                                </div>
+
+                                <% }) %>
+
+                        </div>
+
+                    </div>
+
+                    <!-- REJECT REASON -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label fw-bold">
+                            Reject Reason
+                        </label>
+
+                        <textarea class="form-control" name="rejectReason" rows="3" required
+                            placeholder="Enter rejection reason">
+</textarea>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">
+
+                        Cancel
+
+                    </button>
+
+                    <button class="btn btn-danger">
+
+                        Reject Order
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
