@@ -703,8 +703,8 @@ app.use((err, req, res, next) => {
   res.redirect("/home");
 });
 
-// app.listen(process.env.PORT, () => {
-//   console.log("server is working");
-// });
+app.listen(process.env.PORT, () => {
+  console.log("server is working");
+});
 
-module.exports = app;
+// module.exports = app;
