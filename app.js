@@ -56,7 +56,7 @@ app.use(
     saveUninitialized: false,
 
     store: MongoStore.create({
-      client: mongoose.connection.getClient(), // ✅ important
+      client: process.env.MONGODB_URL, // ✅ important
     }),
 
     cookie: {
@@ -563,7 +563,7 @@ app.post(
     const order = req.body.order;
 
     // project ppt time
-    let logoPath = req.file.path;
+    let logoPath = req.file ? req.file.path : null;
     // let logoPath = null;
 
     // if (req.file) {
@@ -689,23 +689,14 @@ app.use((req, res, next) => {
 // error handler
 app.use((err, req, res, next) => {
   let { statusCode = 500, message = "something went wrong!" } = err;
-  req.flash("error", `${statusCode} : ${message}`);
-  res.redirect("/home");
-});
 
-// redirect home error creating infinite loop
-
-app.use((err, req, res, next) => {
-  let { statusCode = 500, message = "something went wrong!" } = err;
-
-  console.error(err); // ✅ log
-
-  req.flash("error", `${statusCode} : ${message}`);
+  console.error(err);
 
   if (req.originalUrl === "/home") {
-    return res.status(statusCode).send(message); // ✅ break loop
+    return res.status(statusCode).send(message);
   }
 
+  req.flash("error", `${statusCode} : ${message}`);
   res.redirect("/home");
 });
 
