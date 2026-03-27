@@ -78,6 +78,7 @@ const schemas = {
         TotalPrice: Joi.number().min(0).optional(),
       }),
     ),
+
     shippingDetails: Joi.object({
       fullName: Joi.string().required(),
       phone: Joi.string()
@@ -85,7 +86,9 @@ const schemas = {
         .required(),
       address: Joi.string().required(),
       city: Joi.string().required(),
-      pincode: Joi.number().required(),
+      pincode: Joi.string()
+        .pattern(/^[0-9]{6}$/)
+        .required(),
     }).required(),
   }),
 
@@ -95,10 +98,10 @@ const schemas = {
     comment: Joi.string().required(),
   }),
 
-  saveAiSchema: Joi.object({
-    user: Joi.string().hex().length(24).optional(),
-    Slogans: Joi.array().items(Joi.string()).optional(),
-  }),
+  // saveAiSchema: Joi.object({
+  //   user: Joi.string().hex().length(24).optional(),
+  //   Slogans: Joi.array().items(Joi.string()).max(1).optional(),
+  // }),
 };
 
 module.exports = schemas;

@@ -47,6 +47,8 @@ const orderSchema = new mongoose.Schema(
       },
     ],
 
+    totalAmount: Number,
+
     shippingDetails: {
       fullName: {
         type: String,
@@ -66,7 +68,7 @@ const orderSchema = new mongoose.Schema(
         required: true,
       },
       pincode: {
-        type: Number,
+        type: String,
         required: true,
       },
 

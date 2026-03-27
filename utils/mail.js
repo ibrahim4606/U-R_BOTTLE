@@ -37,8 +37,10 @@ const sendMail = async (email, order) => {
     <p>Thank you for ordering from <strong>U'R Bottle</strong></p>
 
     <p>
+    <h3>
     <strong>Order Number:</strong> ${order.orderNumber} <br>
     <strong>Status:</strong> ${order.orderStatus}
+    </h3>
     </p>
 
     <h3>Items</h3>

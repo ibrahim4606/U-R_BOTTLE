@@ -5,9 +5,12 @@
 body {
   font-family: "Plus Jakarta Sans", sans-serif !important;
   min-height: 100vh;
-  width: 100;
+  width: 100%;
+  overflow-x: hidden;
   position: relative;
   z-index: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 /* FIRST LAYER (normal images) */
@@ -17,11 +20,13 @@ body::before {
   inset: 0;
   background-image: url("/images/Bg-image.png");
   background-size: cover;
-  opacity: 0.8; /* optional */
+  opacity: 0.8;
+  /* optional */
   z-index: -2;
 }
 
-.container {
+.container,
+.container-fluid {
   flex: 1;
 }
 
@@ -42,7 +47,8 @@ body::before {
   background-color: #5ab7cf !important;
   color: white !important;
   border: 3.5px solid #5ab7cf !important;
-  padding: 12px 30px; /* Added for better visibility */
+  padding: 12px 30px;
+  /* Added for better visibility */
   font-size: 1.1rem;
   cursor: pointer;
   transform: scale(1);
@@ -61,7 +67,8 @@ body::before {
   position: absolute;
   top: 0;
   left: -100%;
-  width: 100%; /* Changed to 100% to match the slide distance */
+  width: 100%;
+  /* Changed to 100% to match the slide distance */
   height: 100%;
   background-color: white;
   /* INCREASED: From 0.6s to 1.5s */
@@ -112,7 +119,8 @@ body::before {
   position: absolute;
   top: 100%;
   left: 50%;
-  width: 170%; /* Slightly wider for faster visual coverage */
+  width: 170%;
+  /* Slightly wider for faster visual coverage */
   aspect-ratio: 1 / 1;
   background-color: #5ab7cf;
   border-radius: 50%;
@@ -167,7 +175,7 @@ body::before {
 
 /* login signup page */
 .login-signup-container {
-  width: 100vw;
+  width: 100%;
   background-image: url("/images/login-signup.png");
   background-size: cover;
   background-position: center;
@@ -216,7 +224,8 @@ body::before {
     0 35px 70px rgba(0, 0, 0, 0.25),
     /* main bottom shadow */ 0 15px 30px rgba(0, 0, 0, 0.15),
     /* mid shadow */ inset 0 2px 6px rgba(255, 255, 255, 0.9),
-    /* top highlight */ inset 0 -4px 8px rgba(0, 0, 0, 0.05); /* bottom inner edge */
+    /* top highlight */ inset 0 -4px 8px rgba(0, 0, 0, 0.05);
+  /* bottom inner edge */
 
   backdrop-filter: blur(10px);
 }
@@ -299,6 +308,7 @@ body::before {
   .hero-content h1 {
     font-size: 2.5rem !important;
   }
+
   .hero-content p {
     font-size: 1rem !important;
   }
@@ -315,7 +325,8 @@ body::before {
   }
 
   .hero-content {
-    position: static; /* remove absolute positioning */
+    position: static;
+    /* remove absolute positioning */
     width: 100% !important;
     padding: 20px;
     text-align: center;
@@ -330,6 +341,7 @@ body::before {
     font-size: 1rem;
   }
 }
+
 /* review */
 .choose-border {
   border-bottom: 1px solid #bfbfbf;
@@ -352,8 +364,10 @@ body::before {
 /* 🔥 FIXED CARD */
 .review-card {
   min-width: 250px;
-  min-height: 175px; /* changed */
-  height: 100%; /* important for grid */
+  min-height: 175px;
+  /* changed */
+  height: 100%;
+  /* important for grid */
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 15px;
@@ -365,7 +379,8 @@ body::before {
 
 /* 🔥 FIXED TEXT */
 .review-text {
-  overflow: hidden; /* removed inner scroll */
+  overflow: hidden;
+  /* removed inner scroll */
   word-wrap: break-word;
   overflow-wrap: break-word;
   font-size: 0.9rem;
@@ -380,6 +395,7 @@ body::before {
   background: #bbb;
   border-radius: 10px;
 }
+
 /* Profile Page */
 
 /* PROFILE CARD */
@@ -431,10 +447,11 @@ body::before {
   scroll-behavior: smooth;
 }
 
-s .template-scroll::-webkit-scrollbar {
+.template-scroll::-webkit-scrollbar {
   /* Hide scrollbar */
   display: none;
 }
+
 .template-scroll {
   scrollbar-width: none;
 }
@@ -471,7 +488,7 @@ s .template-scroll::-webkit-scrollbar {
 
 /* Pricing page */
 
-.pricing-card,    
+.pricing-card,
 /* about us card */
 .about-card {
   border-radius: 16px;
@@ -480,7 +497,7 @@ s .template-scroll::-webkit-scrollbar {
 
 .pricing-card:hover,
 .about-card:hover {
-  transform: translateY(-6px);
+  transform: scale(1.05);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
@@ -541,9 +558,10 @@ s .template-scroll::-webkit-scrollbar {
   }
 }
 
-/* footer */
+/* footer - sticky at bottom */
 footer {
   margin-top: auto;
+  width: 100%;
 }
 
 .f-info {

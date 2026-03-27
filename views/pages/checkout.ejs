@@ -13,8 +13,8 @@
                 <form action="/place" method="POST" class="needs-validation" novalidate>
                     <div class="mb-2" data-aos="fade-up">
                         <label for="fullname" class="form-label">Name</label>
-                        <input class="form-control border-2 mb-1" name="fullName" placeholder="Full Name" type="text"
-                            required>
+                        <input class="form-control border-2 mb-1" name="shippingDetails[fullName]"
+                            placeholder="Full Name" type="text" required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
@@ -25,8 +25,8 @@
 
                     <div class="mb-2" data-aos="fade-up">
                         <label for="phone" class="form-label">Mobile Number</label>
-                        <input class="form-control border-2 mb-1" name="phone" placeholder="Phone" type="text"
-                            maxlength="10" pattern="[0-9]{10}" required>
+                        <input class="form-control border-2 mb-1" name="shippingDetails[phone]" placeholder="Phone"
+                            type="text" maxlength="10" pattern="[0-9]{10}" required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
@@ -37,7 +37,7 @@
 
                     <div class="mb-2" data-aos="fade-up">
                         <label for="address" class="form-label">Address</label>
-                        <textarea name="address" class="form-control border-2 prompt" type="text"
+                        <textarea name="shippingDetails[address]" class="form-control border-2 prompt" type="text"
                             placeholder="Address, landmark..," required></textarea>
                         <div class="valid-feedback">
                             Looks good!
@@ -49,7 +49,8 @@
 
                     <div class="mb-2" data-aos="fade-up">
                         <label for="City" class="form-label">City</label>
-                        <input class="form-control border-2 mb-1" name="city" placeholder="City" type="text" required>
+                        <input class="form-control border-2 mb-1" name="shippingDetails[city]" placeholder="City"
+                            type="text" required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
@@ -60,8 +61,8 @@
 
                     <div class="mb-2" data-aos="fade-up">
                         <label for="pincode" class="form-label">Pincode</label>
-                        <input class="form-control border-2 mb-1" name="pincode" placeholder="Pincode" type="text"
-                            maxlength="6" pattern="[0-9]{6}" required>
+                        <input class="form-control border-2 mb-1" name="shippingDetails[pincode]" placeholder="Pincode"
+                            type="text" maxlength="6" pattern="[0-9]{6}" required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>

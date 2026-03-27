@@ -58,19 +58,19 @@
                                 <div class="progress mt-3" style="height:10px;">
 
                                     <div class="progress-bar order-progress order-prog-color" role="progressbar"
-                                        data-status="<%= o.orderStatus %>">
+                                        data-status="<%= o.shippingDetails.orderStatus %>">
 
                                     </div>
 
                                 </div>
 
-                                <% if(o.orderStatus==="Rejected" ){ %>
+                                <% if(o.shippingDetails.orderStatus==="Rejected" ){ %>
 
                                     <div class="alert alert-danger mt-2">
 
                                         <strong>Status: Order Rejected</strong><br>
 
-                                        Reason: <%= o.rejectReason %>
+                                        Reason: <%= o.shippingDetails.rejectReason %>
 
                                     </div>
 
@@ -78,7 +78,7 @@
 
                                         <p class="mt-2 small text-muted">
                                             Status: <strong>
-                                                <%= o.orderStatus %>
+                                                <%= o.shippingDetails.orderStatus %>
                                             </strong>
                                         </p>
                                         <%}%>
@@ -113,7 +113,8 @@
                                                 </p>
 
                                                 <p class="mb-1">
-                                                    <b>Total:</b> ₹ <%= o.totalAmount %>
+                                                    <b>Total:</b>
+                                                    ₹ <%= o.totalAmount %>
                                                 </p>
 
                                                 <hr>
@@ -161,7 +162,8 @@
 
                                                                 <small>
                                                                     Units: <%= item.units %> |
-                                                                        Price: ₹ <%= item.perUnitPrice %>
+                                                                        Per uint Price: ₹ <%= item.perUnitPrice %> |
+                                                                            <b>Total:</b> ₹ <%= o.totalAmount %>
                                                                 </small>
                                                             </div>
 

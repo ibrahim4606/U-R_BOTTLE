@@ -63,7 +63,7 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
       httpOnly: true,
-      secure: true, // 🔥 important for production
+      secure: false, // 🔥 important for production for production use true for local use false
     },
   }),
 );
@@ -185,15 +185,15 @@ app.get(
     const totalOrders = await Order.countDocuments();
 
     const inProgress = await Order.countDocuments({
-      orderStatus: "In Progress",
+      "shippingDetails.orderStatus": "In Progress",
     });
 
     const delivered = await Order.countDocuments({
-      orderStatus: "Delivered",
+      "shippingDetails.orderStatus": "Delivered",
     });
 
     const rejected = await Order.countDocuments({
-      orderStatus: "Rejected",
+      "shippingDetails.orderStatus": "Rejected",
     });
 
     const revenue = await Order.aggregate([
@@ -219,13 +219,15 @@ app.post(
   wrapAsync(async (req, res) => {
     const { status, rejectReason } = req.body;
 
-    const updateData = { orderStatus: status };
+    const updateData = { "shippingDetails.orderStatus": status };
 
     if (status === "Rejected") {
-      updateData.rejectReason = rejectReason;
+      updateData["shippingDetails.rejectReason"] = rejectReason;
     }
 
     await Order.findByIdAndUpdate(req.params.id, updateData);
+
+    sendMail(req.session.user.email, order);
 
     req.flash("success", "Order status updated");
 
@@ -433,6 +435,7 @@ app.post(
 app.post(
   "/design-studio/ai-generate",
   validate("aiDesignSchema", "design"),
+  isLoggedIn,
   wrapAsync(async (req, res) => {
     const { title, BrandType, colorTheme, description } = req.body.design;
 
@@ -523,7 +526,7 @@ app.post(
 // save ai generate
 app.post(
   "/design-studio/save-ai-generate",
-  validate("saveAiSchema", "selected"),
+  // validate("saveAiSchema", "selected"),
   wrapAsync(async (req, res) => {
     const selected = new SaveAiDesign(req.body.selected);
     await selected.save();
@@ -616,7 +619,7 @@ app.post(
   isLoggedIn,
   validate("orderSchema"),
   wrapAsync(async (req, res) => {
-    const { fullName, phone, address, city, pincode } = req.body;
+    const { shippingDetails } = req.body;
 
     const cart = await Cart.find({ user: req.session.userId });
 
@@ -637,14 +640,7 @@ app.post(
       user: req.session.userId,
       items,
       totalAmount: total,
-
-      shippingDetails: {
-        fullName,
-        phone,
-        address,
-        city,
-        pincode,
-      },
+      shippingDetails, // clean & direct
     });
 
     await order.save();
@@ -703,8 +699,10 @@ app.use((err, req, res, next) => {
   res.redirect("/home");
 });
 
-app.listen(process.env.PORT, () => {
-  console.log("server is working");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log("server is working on", PORT);
 });
 
 // module.exports = app;

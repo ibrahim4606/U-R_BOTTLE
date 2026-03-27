@@ -22,13 +22,11 @@
                                 Order No. <%= orders.length - index %>
                             </h6>
 
-                            <span class="badge
-
-<% if(order.orderStatus===" Delivered"){ %>
+                            <span class="badge <% if(order.shippingDetails.orderStatus===" Delivered"){ %>
                                 bg-success
-                                <% } else if(order.orderStatus==="In Progress" ){ %>
+                                <% } else if(order.shippingDetails.orderStatus==="In Progress" ){ %>
                                     bg-warning
-                                    <% } else if(order.orderStatus==="Rejected" ){ %>
+                                    <% } else if(order.shippingDetails.orderStatus==="Rejected" ){ %>
                                         bg-danger
                                         <% } else { %>
                                             bg-secondary
@@ -36,7 +34,7 @@
 
                                                 ">
 
-                                                <%= order.orderStatus %>
+                                                <%= order.shippingDetails.orderStatus %>
 
                             </span>
 
@@ -136,14 +134,14 @@
 
                                 <!-- REJECT REASON -->
 
-                                <% if(order.orderStatus==="Rejected" ){ %>
+                                <% if(order.shippingDetails.orderStatus==="Rejected" ){ %>
 
                                     <div class="alert alert-danger mt-3">
 
                                         <b>Rejected Reason:</b>
 
                                         <p class="mb-0">
-                                            <%= order.rejectReason %>
+                                            <%= order.shippingDetails.rejectReason %>
                                         </p>
 
                                     </div>
@@ -152,7 +150,8 @@
 
                                         <!-- UPDATE BUTTONS -->
 
-                                        <% if(order.orderStatus !=="Delivered" && order.orderStatus !=="Rejected" ){ %>
+                                        <% if(order.shippingDetails.orderStatus !=="Delivered" &&
+                                            order.shippingDetails.orderStatus !=="Rejected" ){ %>
                                             <div class="mt-3 d-flex justify-content-end gap-2 flex-wrap">
 
                                                 <button class="btn me-3"
