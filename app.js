@@ -63,7 +63,7 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
       httpOnly: true,
-      secure: false, // 🔥 important for production for production use true for local use false
+      secure: true, // 🔥 important for production for production use true for local use false
     },
   }),
 );
@@ -699,10 +699,10 @@ app.use((err, req, res, next) => {
   res.redirect("/home");
 });
 
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log("server is working on", PORT);
-});
+// app.listen(PORT, () => {
+//   console.log("server is working on", PORT);
+// });
 
-// module.exports = app;
+module.exports = app;
